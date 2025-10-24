@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="latte-art.png" />
+    <title>Armazém do grão</title>
+  </head>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 1500px;
+      font-family: "League Spartan", sans-serif;
+      font-weight: bold;
+      background-color: beige;
+    }
+    .parallax {
+      height: 200px;
+      background-image: url(https://wallpapercat.com/w/full/8/f/3/584702-3840x2160-desktop-4k-cafe-wallpaper.jpg);
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+    }
+    h1 {
+      color: rgb(255, 255, 255);
+      text-align: left;
+      margin: 4%;
+      font-size: 100px;
+    }
+    a {
+      color: rgb(255, 255, 255);
+      text-align: left;
+      margin: 8%;
+      font-size: 30px;
+      margin: 0%;
+      text-decoration: none;
+    }
+    h4 {
+      cursor: url("coffee-beans.png") 10 10, auto;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      width: 220px;
+      padding: 10px;
+      margin: 10px;
+      text-align: center;
+      background-color: rgb(255, 255, 255);
+      display: flex;
+      flex-direction: column;
+    }
+    .card img {
+      border-radius: 10px;
+      width: 100%;
+    }
+    .tag-oferta {
+      position: absolute;
+      background-color: red;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 5px;
+    }
+
+    .buttom {
+      background-color: rgb(255, 1, 1);
+      border-radius: 10px;
+      text-align: center;
+      padding: 10px;
+      color: white;
+      font-size: 30px;
+      margin-top: auto;
+    }
+    .footer {
+      background-color: rgb(108, 3, 3);
+      color: white;
+      text-align: center;
+      padding: 2px;
+      background-image: linear-gradient(
+        to right,
+        rgba(108, 3, 3, 0.7),
+        rgba(245, 128, 4, 0.7)
+      );
+    }
+
+    .navbar {
+      background-image: linear-gradient(
+        to right,
+        rgba(108, 3, 3, 0.9),
+        rgba(245, 128, 4, 0.9)
+      );
+      padding: 15px 20px;
+      position: relative;
+      min-height: 30px;
+      z-index: 1000;
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+
+    .menu-icon {
+      cursor: pointer;
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      z-index: 100;
+    }
+    .menu-icon span {
+      display: block;
+      width: 28px;
+      height: 3px;
+      background-color: #fff;
+      margin-bottom: 5px;
+      border-radius: 2px;
+      transition: all 0.3s ease-in-out;
+    }
+    .menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background-image: linear-gradient(
+        to right,
+        rgba(108, 3, 3, 0.95),
+        rgba(245, 128, 4, 0.95)
+      );
+    }
+    .menu li a {
+      display: block;
+      padding: 15px 20px;
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 16px;
+    }
+    .menu li a:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+    .menu-toggle:checked ~ .menu {
+      max-height: 500px;
+    }
+    .menu-toggle:checked + .menu-icon span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .menu-toggle:checked + .menu-icon span:nth-child(2) {
+      opacity: 0; /* Linha do meio desaparece */
+    }
+
+    .menu-toggle:checked + .menu-icon span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+    @media (min-width: 3000px) {
+      .menu-icon {
+        display: none;
+      }
+      .menu {
+        position: static;
+        max-height: none;
+        overflow: visible;
+        background-color: transparent;
+        background-image: none;
+        float: right;
+      }
+
+      .menu li {
+        display: inline-block;
+      }
+
+      .menu li a {
+        padding: 10px 15px;
+        border-bottom: none;
+        font-size: 16px;
+      }
+
+      .menu li a:hover {
+        background-color: transparent;
+        color: #ddd;
+      }
+    }
+  </style>
+  <body>
+    <div class="parallax">
+      <h1>Armazém do Grão</h1>
+    </div>
+
+    <nav class="navbar">
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+
+      <label for="menu-toggle" class="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <ul class="menu">
+        <li><a href="sobrenos.html">Sobre nós</a></li>
+        <li><a href="#login">Login</a></li>
+        <li><a href="#logout">Logout</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <div class="card">
+        <div class="tag-oferta">OFERTA!</div>
+        <img
+          src="https://loucodocafe.com.br/wp-content/uploads/2019/09/cafe-expresso-02-e1568084083582-810x456.jpg"
+          width="200"
+        />
+        <h2>Espresso</h2>
+        <p>
+          Intenso e aromático, o espresso é a mais pura expressão do café.
+          Extraído sob alta pressão, cria uma bebida concentrada, encorpada e
+          com crema aveludada. No paladar, revela a complexidade de sabores do
+          grão, variando de notas achocolatadas a frutadas.
+        </p>
+        <div class="buttom">
+          <h4>Compre</h4>
+        </div>
+      </div>
+      <div class="card">
+        <div class="tag-oferta">OFERTA!</div>
+        <img
+          src="https://content.paodeacucar.com/wp-content/uploads/2019/09/p%C3%A3o-de-queijo-de-liquidificador.jpg"
+          width="200"
+        />
+        <h2>Pão de Queijo</h2>
+        <p>
+          Um clássico brasileiro perfeito para qualquer hora do dia, o pão de
+          queijo encanta com sua casca dourada e crocante e interior macio.
+          Feito com polvilho e queijo, seu sabor levemente salgado e textura
+          única.
+        </p>
+        <div class="buttom">
+          <h4>Compre</h4>
+        </div>
+      </div>
+      <div class="card">
+        <div class="tag-oferta">OFERTA!</div>
+        <img
+          src="https://guiadacozinha.com.br/wp-content/uploads/2024/05/bolodecenoura.jpg"
+          width="200"
+        />
+        <h2>Bolo de Cenoura com Cobertura de Chocolate</h2>
+        <p>
+          Um ícone da confeitaria caseira, o bolo de cenoura com cobertura de
+          chocolate combina perfeitamente o fofinho e o cremoso. Sua massa úmida
+          e de cor vibrante, com a doçura sutil da cenoura.
+        </p>
+        <div class="buttom">
+          <h4>Compre</h4>
+        </div>
+      </div>
+      <div class="card">
+        <div class="tag-oferta">OFERTA!</div>
+        <img
+          src="https://icecreambakery.in/wp-content/uploads/2024/12/Brownie-Recipe-with-Cocoa-Powder.jpg"
+          width="200"
+        />
+        <h2>Brownie de Chocolate</h2>
+        <p>
+          Para os verdadeiros amantes de chocolate, o brownie é a escolha ideal.
+          Com textura densa e úmida, entre bolo e biscoito, proporciona uma
+          experiência rica. A casquinha crocante contrasta com o interior macio,
+          que pode ter nozes ou pedaços de chocolate.
+        </p>
+        <div class="buttom">
+          <h4>Compre</h4>
+        </div>
+      </div>
+      <div class="card">
+        <div class="tag-oferta">OFERTA!</div>
+        <img
+          src="https://storage.googleapis.com/imagens_videos_gou_cooking_prod/production/mesas/2019/11/1acdc8cb-croissant-_-tm-croissant-folhados-brioches-_-claudia-rezende-_-6605-baixa-3.jpg"
+          width="200"
+        />
+        <h2>Croissant Amanteigado</h2>
+        <p>
+          De origem austríaca e aperfeiçoado na França, o croissant personifica
+          a técnica e o sabor. Sua massa folhada, com dobras de manteiga, cria
+          camadas finas e aeradas, resultando em uma casca dourada e crocante
+          com interior macio. Perfeito puro ou com recheios.
+        </p>
+        <div class="buttom">
+          <h4>Compre</h4>
+        </div>
+      </div>
+      <div class="card">
+        <div class="tag-oferta">OFERTA!</div>
+        <img
+          src="https://guiadacozinha.com.br/wp-content/uploads/2019/10/cheesecake-de-morango-768x619.jpg"
+          width="200"
+        />
+        <h2>Cheesecake de Frutas Vermelhas</h2>
+        <p>
+          Com base de biscoito, recheio cremoso de cream cheese e cobertura de
+          frutas vermelhas, esta torta norte-americana equilibra doce e ácido,
+          conquistando as cafeterias brasileiras com sua sofisticação e frescor.
+        </p>
+        <div class="buttom">
+          <h4>Compre</h4>
+        </div>
+      </div>
+    </div>
+
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer">
+        <h2>Armazém do café - 2025 - Direitos Reservados</h2>
+      </div>
+    </footer>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget("https://vlibras.gov.br/app");
+    </script>
+  </body>
+</html>
