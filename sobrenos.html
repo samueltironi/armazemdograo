@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="latte-art.png" />
+    <title>Desafio Final</title>
+  </head>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 1500px;
+      font-family: "League Spartan", sans-serif;
+      font-weight: bold;
+      background-color: beige;
+    }
+    .parallax {
+      height: 200px;
+      background-image: url(https://wallpapercat.com/w/full/8/f/3/584702-3840x2160-desktop-4k-cafe-wallpaper.jpg);
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+    }
+      body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 1500px;
+      font-family: "League Spartan", sans-serif;
+      font-weight: bold;
+      background-color: beige;
+    }
+    .parallax {
+      height: 200px;
+      background-image: url(https://wallpapercat.com/w/full/8/f/3/584702-3840x2160-desktop-4k-cafe-wallpaper.jpg);
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+    }
+    h1 {
+      color: rgb(255, 255, 255);
+      text-align: left;
+      margin: 4%;
+      font-size: 100px;
+    }
+    /* Seu estilo 'a' global. O menu o sobrescreverá onde for necessário. */
+    a {
+      color: rgb(255, 255, 255);
+      text-align: left;
+      margin: 8%;
+      font-size: 30px;
+      margin: 0%;
+      text-decoration: none;
+    }
+    h4 {
+      cursor: url("coffee-beans.png") 10 10, auto;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      width: 220px;
+      padding: 10px;
+      margin: 10px;
+      text-align: center;
+      background-color: rgb(255, 255, 255);
+      display: flex;
+      flex-direction: column;
+    }
+    .card img {
+      border-radius: 10px;
+      width: 100%;
+    }
+    .tag-oferta {
+      position: absolute;
+      background-color: red;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 5px;
+    }
+    
+    /* O CSS do .banner foi removido pois o menu o substituiu */
+    
+    .buttom {
+      background-color: rgb(255, 1, 1);
+      border-radius: 10px;
+      text-align: center;
+      padding: 10px;
+      color: white;
+      font-size: 30px;
+      margin-top: auto;
+    }
+    .footer {
+      background-color: rgb(108, 3, 3);
+      color: white;
+      text-align: center;
+      padding: 2px;
+      background-image: linear-gradient(
+        to right,
+        rgba(108, 3, 3, 0.7),
+        rgba(245, 128, 4, 0.7)
+      );
+    }
+
+    /* --- INÍCIO DO CÓDIGO DO MENU HAMBURGUER --- */
+
+    /* Container da barra de navegação */
+    .navbar {
+      /* Estilizado para combinar com seu tema */
+      background-image: linear-gradient(
+        to right,
+        rgba(108, 3, 3, 0.9),
+        rgba(245, 128, 4, 0.9)
+      );
+      padding: 15px 20px;
+      position: relative;
+      min-height: 30px;
+      z-index: 1000; /* Garante que fique acima do parallax */
+    }
+
+    /* O checkbox que controla tudo - ele fica escondido! */
+    .menu-toggle {
+      display: none;
+    }
+
+    /* O ícone hamburguer (o <label>) */
+    .menu-icon {
+      display: block; /* Visível apenas em telas "mobile" */
+      cursor: pointer;
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      z-index: 100; /* Garante que o ícone fique por cima de tudo */
+    }
+
+    /* As 3 linhas do ícone hamburguer */
+    .menu-icon span {
+      display: block;
+      width: 28px;
+      height: 3px;
+      background-color: #fff;
+      margin-bottom: 5px;
+      border-radius: 2px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* O menu <ul> */
+    .menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      /* Escondido por padrão */
+      max-height: 0;
+      overflow: hidden; /* Esconde o conteúdo que transborda */
+      transition: max-height 0.4s ease-out;
+
+      /* Posicionamento para o menu suspenso */
+      position: absolute;
+      top: 60px; /* Abaixo da navbar */
+      left: 0;
+      right: 0;
+      /* Fundo para combinar com a navbar */
+      background-image: linear-gradient(
+        to right,
+        rgba(108, 3, 3, 0.95),
+        rgba(245, 128, 4, 0.95)
+      );
+    }
+
+    /* Estilo dos itens do menu <li> <a> */
+    .menu li a {
+      display: block;
+      padding: 15px 20px;
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 16px; /* Sobrescreve seu estilo 'a' global de 30px */
+    }
+
+    .menu li a:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    /* ----- A MÁGICA ACONTECE AQUI ----- */
+
+    /* Quando o checkbox está MARCADO (checked)... */
+    .menu-toggle:checked ~ .menu {
+      /* ...o menu (que é "irmão" dele) expande */
+      max-height: 500px; /* Um valor alto o suficiente para caber os links */
+    }
+
+    /* (Bônus) Animação do ícone para "X" quando o menu está aberto */
+    .menu-toggle:checked + .menu-icon span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .menu-toggle:checked + .menu-icon span:nth-child(2) {
+      opacity: 0; /* Linha do meio desaparece */
+    }
+
+    .menu-toggle:checked + .menu-icon span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* --- Configuração para Desktop (opcional) --- */
+
+    /* Em telas maiores (ex: 769px ou mais), mostramos o menu 
+       normalmente e escondemos o ícone hamburguer. */
+    @media (min-width: 3000px) {
+      /* Esconde o ícone hamburguer */
+      .menu-icon {
+        display: none;
+      }
+
+      /* Mostra o menu de forma linear */
+      .menu {
+        position: static; /* Remove o posicionamento absoluto */
+        max-height: none; /* Remove a restrição de altura */
+        overflow: visible; /* Garante que seja visível */
+        background-color: transparent; /* Remove o fundo */
+        background-image: none; /* Remove o gradiente no desktop */
+        float: right; /* Alinha os itens à direita */
+      }
+
+      .menu li {
+        display: inline-block; /* Coloca os itens lado a lado */
+      }
+
+      .menu li a {
+        padding: 10px 15px;
+        border-bottom: none; /* Remove a borda no desktop */
+        font-size: 16px; /* Mantém o tamanho da fonte */
+      }
+
+      .menu li a:hover {
+        background-color: transparent;
+        color: #ddd;
+      }
+    }
+    /* --- FIM DO CÓDIGO DO MENU HAMBURGUER --- */
+
+    h3 {
+      text-align: left;
+    }
+    .container {
+      display: flex;
+    }
+    .card1 {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      width: 25%;
+      padding: 10px;
+      margin: 10px;
+      text-align: center;
+      background-color: rgb(255, 255, 255);
+    }
+    .card2 {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      width: 25%;
+      padding: 10px;
+      margin: 10px;
+      text-align: center;
+      background-color: rgb(255, 255, 255);
+    }
+    .card2 img {
+      border-radius: 10px;
+      width: 100%;
+    }
+    .banner {
+      background-color: rgb(108, 3, 3);
+      padding: 30px;
+      background-image: linear-gradient(
+        to right,
+        rgba(108, 3, 3, 0.7),
+        rgba(245, 128, 4, 0.7)
+      );
+    }
+    .tag-fundadores {
+      position: absolute;
+      background-color: rgb(88, 2, 2);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+    p {
+        text-align: left;
+    }
+  </style>
+  <body>
+    <div class="parallax">
+      <h1>Armazém do Grão</h1>
+    </div>
+    <nav class="navbar">
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+
+      <label for="menu-toggle" class="menu-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <ul class="menu">
+        <li><a href="desafiofinal.html">Página inicial</a></li> <li><a href="#login">Login</a></li>
+        <li><a href="#logout">Logout</a></li>
+      </ul>
+    </nav>
+  
+    <div class="container">
+      <div class="card1">
+        <h3>
+          Bem-vindo à Armazem do grão. Nós não vendemos apenas café; nós
+          selecionamos experiências. Nascemos da paixão por grãos excepcionais e
+          da busca incansável pelo sabor perfeito. Nossa jornada começa muito
+          antes da torra. Visitamos fazendas, estabelecemos parcerias diretas
+          com produtores dedicados e escolhemos a dedo apenas os melhores
+          microlotes de cafés especiais. Cada grão que chega até nós carrega uma
+          história, um terroir único e um potencial sensorial que fazemos
+          questão de preservar. Em nossa torrefação própria, tratamos esses
+          grãos com a precisão de um artesão. A torra é feita em pequenos lotes,
+          cuidadosamente calibrada para destacar as notas complexas, a doçura
+          natural e os aromas que tornam cada café único. Seja para levar nossos
+          grãos recém-torrados para casa ou para desfrutar de uma xícara
+          perfeitamente extraída por nossos baristas em nossa cafeteria, o
+          compromisso da Armazem do grão é um só: elevar sua pausa para o café a
+          um momento de pura descoberta. Descubra o verdadeiro potencial do
+          café.
+        </h3>
+      </div>
+
+      <div class="card2">
+        <div class="tag-fundadores">Fundador</div>
+        <img
+          src="https://img.freepik.com/fotos-gratis/jovem-bonito-vestindo-camiseta-casual-sobre-o-rosto-feliz-de-fundo-azul-sorrindo-com-os-bracos-cruzados-olhando-para-a-camera-pessoa-positiva_839833-12963.jpg?semt=ais_hybrid&w=740&q=80"
+          width="200"
+        />
+        <h2>Marcos João Pereira Aguiar</h2>
+        <p>
+          Chef autodidata e apaixonado por comida de verdade, Marcos cresceu entre panelas, aprendendo receitas com a avó e explorando sabores regionais do Brasil. Sua especialidade é transformar ingredientes simples em lanches memoráveis, com aquele toque caseiro que desperta nostalgia. No cardápio da lanchonete, cada prato carrega um pouco de sua história e muito cuidado com qualidade e frescor. Marcos também lidera a inovação gastronômica da casa, criando novos itens sazonais e veganos com a mesma paixão.
+        </p>
+      </div>
+      <div class="card2">
+        <div class="tag-fundadores">Fundador</div>
+        <img
+          src="https://media.istockphoto.com/id/1178618686/pt/foto/young-man-portrait.jpg?s=612x612&w=0&k=20&c=J1CGIY4bjXnX_A_AwgJFzegcf8Zuz6THAZCajWtta-U="
+          width="200"
+        />
+        <h2>Jorge Antonio Vieira</h2>
+        <p>
+          Publicitário de formação e empreendedor por vocação, Jorge é o responsável por transformar a visão da empresa em uma marca forte e envolvente. Com um olhar afiado para tendências e comportamento do consumidor, ele desenhou o conceito da lanchonete como um ponto de encontro urbano, moderno e acessível. Jorge também cuida do marketing, redes sociais e campanhas que conectam o público ao propósito do negócio.
+        </p>
+      </div>
+      <div class="card2">
+        <div class="tag-fundadores">Fundadora</div>
+        <img
+          src="https://forbes.com.br/wp-content/uploads/2022/07/lideranca-feminina-forbesmulher.jpg"
+          width="200"
+        />
+        <h2>Maria Laura Guedes</h2>
+        <p>
+          Com mais de uma década de experiência no mundo dos cafés especiais, Maria é a alma sensorial da empresa. Apaixonada por grãos, torrefações e métodos de preparo, ela estudou com mestres baristas na Colômbia e na Itália antes de retornar ao Brasil com a ideia de criar um espaço que unisse sabor, arte e acolhimento. É dela a curadoria dos cafés servidos e o treinamento da equipe para garantir uma experiência única em cada xícara.
+        </p>
+      </div>
+    </div>
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget("https://vlibras.gov.br/app");
+    </script>
+  </body>
+</html>
